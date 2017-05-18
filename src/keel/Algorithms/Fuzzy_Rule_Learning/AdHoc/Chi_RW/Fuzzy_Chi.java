@@ -186,16 +186,16 @@ public class Fuzzy_Chi {
 		hits = 0;
 		vars = dataset.getNumberVariables();
 		String [] input = new String[vars];
-		for (int i = 0; i < train.size(); i++){
+		for (int i = 0; i < dataset.size(); i++){
 			byte classIndex = 0;
-			input = train.getExample(i);
-			classIndex =  train.getClass(i);
+			input = dataset.getExample(i);
+			classIndex =  dataset.getClass(i);
 			byte classOut = kb.classify(this.inferenceType, input);
 			hits += classIndex == classOut ? 1 : 0;
 			output += classIndex +"\t"+classOut+"\n";
 		}
 		Files.writeFile(filename, output);
-		return 1.0*hits/train.size();
+		return 1.0*hits/dataset.size();
 	}
 }
 
